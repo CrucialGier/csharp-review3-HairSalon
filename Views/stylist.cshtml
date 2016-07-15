@@ -3,7 +3,7 @@
 <ul>
   @foreach (var client in @Model.GetClients())
   {
-    <li>@client.GetName()</li>
+    <li>@client.GetName() | <a href="/appointment/edit/@client.GetId()">Edit</a> | <a href="/appointment/delete/@client.GetId()">Delete</a></li>
   }
 </ul>
 

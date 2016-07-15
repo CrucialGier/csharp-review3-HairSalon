@@ -1,0 +1,10 @@
+
+<h2>Edit stylist: @Model.GetName()</h2>
+<form action="/stylist/edit/@Model.GetId()" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+  <input name="stylist-id" type="hidden" value="@Model.GetId()">
+  <label for="newName">New Stylist name</label>
+  <input id="newName" name="newName" type="text">
+  <button type="submit">Submit</button>
+</form>
+<a href="/">View Stylists</a>
