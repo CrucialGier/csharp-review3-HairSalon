@@ -1,0 +1,15 @@
+<h3>Appointments for @Model.GetName()</h3>
+
+<ul>
+  @foreach (var client in @Model.GetClients())
+  {
+    <li>@client.GetName()</li>
+  }
+</ul>
+
+<form action="/new-appointment/@Model.GetId()" method="post">
+  <label for="newClient">Make an Appointment with @Model.GetName()</label>
+  <input id="newClient" name="newClient">
+  <button type="submit">Make Appointment</button>
+</form>
+<a href="/">Back to Stylists</a>
