@@ -16,8 +16,8 @@ namespace HairSalon.Objects
     [Fact]
     public void Test_Equals_ObjectEqualsOverride()
     {
-      Client firstClient = new Client("Rebecca");
-      Client secondClient = new Client("Rebecca");
+      Client firstClient = new Client("Rebecca", 1);
+      Client secondClient = new Client("Rebecca", 1);
 
       Assert.Equal(firstClient, secondClient);
     }
@@ -25,8 +25,8 @@ namespace HairSalon.Objects
     [Fact]
     public void Test_GetAll_RetrievesAllClientsFromDatabase()
     {
-      Client firstClient = new Client("Rebecca");
-      Client secondClient = new Client("Tony");
+      Client firstClient = new Client("Rebecca", 1);
+      Client secondClient = new Client("Tony", 1);
       firstClient.Save();
       secondClient.Save();
 
@@ -39,7 +39,7 @@ namespace HairSalon.Objects
     [Fact]
     public void Test_Save_SavesClientToDatabase()
     {
-      Client testClient = new Client("Rebecca");
+      Client testClient = new Client("Rebecca", 1);
       testClient.Save();
 
       List<Client> result = Client.GetAll();
@@ -51,7 +51,7 @@ namespace HairSalon.Objects
     [Fact]
     public void Test_Find_FindsCategoryInDatabase()
     {
-      Client testClient = new Client("Rebecca");
+      Client testClient = new Client("Rebecca", 1);
       testClient.Save();
 
       Client foundClient = Client.Find(testClient.GetId());
@@ -63,11 +63,13 @@ namespace HairSalon.Objects
     public void Test_Update_UpdatesClientInDatabase()
     {
       string name = "Rebecca";
-      Client testClient = new Client(name);
+      int stylistId = 1;
+      Client testClient = new Client(name, stylistId);
       testClient.Save();
       string newName = "Becky";
+      int newStylistId = 2;
 
-      testClient.Update(newName);
+      testClient.Update(newName, newStylistId);
 
       string result = testClient.GetName();
 

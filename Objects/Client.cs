@@ -9,11 +9,13 @@ namespace HairSalon.Objects
   {
     private int _id;
     private string _name;
+    private int _stylistId;
 
-    public Client(string Name, int Id = 0)
+    public Client(string Name, int StylistId, int Id = 0)
     {
-      _id = Id;
       _name = Name;
+      _stylistId = StylistId;
+      _id = Id;
     }
 
     public int GetId()
@@ -32,6 +34,15 @@ namespace HairSalon.Objects
     public void SetName(string Name)
     {
       _name = Name;
+    }
+
+    public int GetStylistId()
+    {
+      return _stylistId;
+    }
+    public void SetStylistId(int StylistId)
+    {
+      _stylistId = StylistId;
     }
 
     public override bool Equals(System.Object otherClient)
@@ -64,7 +75,8 @@ namespace HairSalon.Objects
       {
         int clientId = rdr.GetInt32(0);
         string clientName = rdr.GetString(1);
-        Client newClient = new Client(clientName, clientId);
+        int clientSylistId = rdr.GetInt32(2);
+        Client newClient = new Client(clientName, clientSylistId, clientId);
         allClients.Add(newClient);
       }
 
@@ -86,12 +98,18 @@ namespace HairSalon.Objects
       SqlDataReader rdr;
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO clients (name) OUTPUT INSERTED.id VALUES (@ClientName);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO clients (name, stylistId) OUTPUT INSERTED.id VALUES (@ClientName, @ClientStylistId);", conn);
 
       SqlParameter nameParameter = new SqlParameter();
       nameParameter.ParameterName = "@ClientName";
       nameParameter.Value = this.GetName();
       cmd.Parameters.Add(nameParameter);
+
+      SqlParameter stylistIdParameter = new SqlParameter();
+      stylistIdParameter.ParameterName = "@ClientStylistId";
+      stylistIdParameter.Value = this.GetStylistId();
+      cmd.Parameters.Add(stylistIdParameter);
+
       rdr = cmd.ExecuteReader();
 
       while(rdr.Read())
@@ -123,13 +141,15 @@ namespace HairSalon.Objects
 
       int foundClientId = 0;
       string foundClientName = null;
+      int foundClientStylistId = 0;
 
       while(rdr.Read())
       {
         foundClientId = rdr.GetInt32(0);
         foundClientName = rdr.GetString(1);
+        foundClientStylistId = rdr.GetInt32(2);
       }
-      Client foundClient = new Client(foundClientName, foundClientId);
+      Client foundClient = new Client(foundClientName, foundClientStylistId, foundClientId);
 
       if (rdr != null)
       {
@@ -142,18 +162,23 @@ namespace HairSalon.Objects
       return foundClient;
     }
 
-    public void Update(string newName)
+    public void Update(string newName, int newStylistId)
     {
       SqlConnection conn = DB.Connection();
       SqlDataReader rdr;
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("UPDATE clients SET name = @NewName OUTPUT INSERTED.name WHERE id = @ClientId;", conn);
+      SqlCommand cmd = new SqlCommand("UPDATE clients SET name = @NewName OUTPUT INSERTED.name WHERE id = @ClientId; UPDATE clients SET stylistId = @NewStylistId OUTPUT INSERTED.stylistId WHERE id = @ClientId;", conn);
 
       SqlParameter newNameParameter = new SqlParameter();
       newNameParameter.ParameterName = "@NewName";
       newNameParameter.Value = newName;
       cmd.Parameters.Add(newNameParameter);
+
+      SqlParameter NewStylistIdParameter = new SqlParameter();
+      NewStylistIdParameter.ParameterName = "@NewStylistId";
+      NewStylistIdParameter.Value = newStylistId;
+      cmd.Parameters.Add(NewStylistIdParameter);
 
 
       SqlParameter clientIdParameter = new SqlParameter();
