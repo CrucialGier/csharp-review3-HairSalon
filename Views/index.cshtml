@@ -1,0 +1,12 @@
+<h2> Hair Salon </h2>
+<p>Pick a hair stylist and make an appointment.</p>
+<ul>
+@foreach (var stylist in @Model)
+{
+  <li><a href="/appointments/stylist.GetId()">stylist.GetName()</a></li>
+}
+</ul>
+
+<form action="/stylist-form">
+  <button type="submit">Add New Stylist to the Roster</button>
+</form>
