@@ -1,1 +1,11 @@
-
+<h2>Cancel Confirmation</h2>
+<hr/>
+<h2>Are you sure you want to cancel this client's appointment?</h2>
+<h3>@Model.GetName()</h3>
+<form action="/appointment/delete/@Model.GetId()" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+  <button type="submit">Yes</button>
+</form>
+<form action="/appointments/@Model.GetId()" method="get">
+  <button type="submit">No</button>
+</form>
