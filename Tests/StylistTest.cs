@@ -49,6 +49,21 @@ namespace HairSalon.Objects
     }
 
     [Fact]
+    public void Test_Update_UpdatesStylistInDatabase()
+    {
+      string name = "Rebecca";
+      Stylist testStylist = new Stylist(name);
+      testStylist.Save();
+      string newName = "Becky";
+
+      testStylist.Update(newName);
+      
+      string result = testStylist.GetName();
+
+      Assert.Equal(newName, result);
+    }
+
+    [Fact]
      public void Test_Find_FindsCategoryInDatabase()
      {
        Stylist testStylist = new Stylist("Rebecca");
