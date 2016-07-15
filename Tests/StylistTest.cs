@@ -49,6 +49,24 @@ namespace HairSalon.Objects
     }
 
     [Fact]
+    public void Test_GetClients_RetrievesAllClientsWithStylist()
+    {
+      Stylist testStylist = new Stylist("Rebecca");
+      testStylist.Save();
+
+      Client firstClient = new Client("Sam", testStylist.GetId());
+      firstClient.Save();
+      Client secondClient = new Client("Beth", testStylist.GetId());
+      secondClient.Save();
+
+
+      List<Client> testClientList = new List<Client> {firstClient, secondClient};
+      List<Client> resultClientList = testStylist.GetClients();
+
+      Assert.Equal(testClientList, resultClientList);
+    }
+
+    [Fact]
     public void Test_Find_FindsCategoryInDatabase()
     {
       Stylist testStylist = new Stylist("Rebecca");
