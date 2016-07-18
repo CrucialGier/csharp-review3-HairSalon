@@ -1,5 +1,5 @@
 <h2>Edit client: @Model.GetName()</h2>
-<form action="/appointment/edit/@Model.GetId()" method="post">
+<form action="/client/edit/@Model.GetId()" method="post">
   <input type="hidden" name="_method" value="PATCH">
   <input name="client-id" type="hidden" value="@Model.GetId()">
   <label for="newName">New Client name</label>

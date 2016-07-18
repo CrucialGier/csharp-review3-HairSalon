@@ -3,11 +3,11 @@
 <ul>
   @foreach (var client in @Model.GetClients())
   {
-    <li>@client.GetName() | <a href="/appointment/edit/@client.GetId()">Edit</a> | <a href="/appointment/delete/@client.GetId()">Delete</a></li>
+    <li>@client.GetName() | <a href="/client/edit/@client.GetId()">Edit</a> | <a href="/client/delete/@client.GetId()">Delete</a></li>
   }
 </ul>
 
-<form action="/new-appointment/@Model.GetId()" method="post">
+<form action="/client/new/@Model.GetId()" method="post">
   <label for="newClient">Make an Appointment with @Model.GetName()</label>
   <input id="newClient" name="newClient">
   <button type="submit">Make Appointment</button>

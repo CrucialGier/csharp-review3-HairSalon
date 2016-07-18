@@ -13,21 +13,21 @@ namespace HairSalon
         List<Stylist> allStylists = Stylist.GetAll();
         return View["index.cshtml", allStylists];
       };
-      Get["/stylist-form"] =_=> {
+      Get["/stylist/new"] =_=> {
         List<Stylist> allStylists = Stylist.GetAll();
         return View["stylist_form.cshtml", allStylists];
       };
-      Post["/added-stylist"] =_=> {
+      Post["/stylist/added"] =_=> {
         Stylist newStylist = new Stylist(Request.Form["newName"]);
         newStylist.Save();
         List<Stylist> allStylists = Stylist.GetAll();
         return View["index.cshtml", allStylists];
       };
-      Get["/appointments/{id}"] = parameters => {
+      Get["/clients/{id}"] = parameters => {
         Stylist currentStylist = Stylist.Find(parameters.id);
         return View["stylist.cshtml", currentStylist];
       };
-      Post["/new-appointment/{id}"] = parameters => {
+      Post["/client/new/{id}"] = parameters => {
         Client newClient = new Client(Request.Form["newClient"], parameters.id);
         newClient.Save();
         Stylist currentStylist = Stylist.Find(parameters.id);
@@ -53,21 +53,21 @@ namespace HairSalon
         List<Stylist> allStylists = Stylist.GetAll();
         return View["index.cshtml", allStylists];
       };
-      Get["/appointment/edit/{id}"] = parameters => {
+      Get["/client/edit/{id}"] = parameters => {
         Client currentClient = Client.Find(parameters.id);
         return View["client_edit.cshtml", currentClient];
       };
-      Patch["/appointment/edit/{id}"] = parameters => {
+      Patch["/client/edit/{id}"] = parameters => {
         Client currentClient = Client.Find(parameters.id);
         Stylist currentStylist = Stylist.Find(currentClient.GetStylistId());
         currentClient.Update(Request.Form["newName"], currentStylist.GetId());
         return View["stylist.cshtml", currentStylist];
       };
-      Get["/appointment/delete/{id}"] = parameters => {
+      Get["/client/delete/{id}"] = parameters => {
         Client currentClient = Client.Find(parameters.id);
         return View["client_delete.cshtml", currentClient];
       };
-      Delete["/appointment/delete/{id}"] = parameters => {
+      Delete["/client/delete/{id}"] = parameters => {
         Client currentClient = Client.Find(parameters.id);
         currentClient.Delete();
         Stylist currentStylist = Stylist.Find(currentClient.GetStylistId());

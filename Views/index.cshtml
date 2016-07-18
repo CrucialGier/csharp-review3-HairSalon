@@ -3,10 +3,10 @@
 <ul>
   @foreach (var stylist in @Model)
   {
-    <li><a href="/appointments/@stylist.GetId()">@stylist.GetName()</a> | <a href="/stylist/edit/@stylist.GetId()">Edit</a> | <a href="/stylist/delete/@stylist.GetId()">Delete</a></li>
+    <li><a href="/clients/@stylist.GetId()">@stylist.GetName()</a> | <a href="/stylist/edit/@stylist.GetId()">Edit</a> | <a href="/stylist/delete/@stylist.GetId()">Delete</a></li>
   }
 </ul>
 
-<form action="/stylist-form">
+<form action="/stylist/new">
   <button type="submit">Add New Stylist to the Roster</button>
 </form>

@@ -6,27 +6,44 @@
 
 * Assuming you are running on windows and you have mono and nancy installed. (http://www.mono-project.com/docs/getting-started/install/windows/)
 * Clone the repository at
-(https://github.com/CrucialGier/csharp_review2_word-finder.git)
+(https://github.com/CrucialGier/csharp-review3-HairSalon.git)
 * using the command git clone
 * Create empty databases using the .sql files provided by opening them in Microsoft SQL Server Manager Studio and executing the scripts or type the commands :
 
-CREATE DATABASE hair_salon |
-GO |
-USE hair_salon |
-GO |
-CREATE TABLE clients |
-( |
-	id int IDENTITY(1,1), |
-	name varchar(255), |
-  stylistId int |
-) |
-GO |
-CREATE TABLE dbo.stylists |
-( |
-	id int IDENTITY(1,1), |
-	name varchar(255) |
-) |
-GO |
+CREATE DATABASE hair_salon
+
+GO
+
+USE hair_salon
+
+GO
+
+CREATE TABLE clients
+
+(
+
+	id int IDENTITY(1,1),
+
+	name varchar(255),
+
+  stylistId int
+
+)
+
+GO
+
+CREATE TABLE stylists
+
+(
+
+	id int IDENTITY(1,1),
+
+	name varchar(255)
+
+)
+
+GO
+
 
 * Enter the files directory using the console and enter dnu restore and then dnx kestrel
 
